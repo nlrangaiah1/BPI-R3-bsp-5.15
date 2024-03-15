@@ -190,7 +190,7 @@
 
 		port@0 {
 			reg = <0>;
-			label = "wan";
+			label = "erouter0";
 		};
 
 		port@1 {

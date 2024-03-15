@@ -18,7 +18,7 @@ cp_download_files()
 {
 T="$TOPDIR"
 SD="$T/SD"
-U="${SD}/100MB"
+U="${SD}"
 B="${SD}/BPI-BOOT"
 R="${SD}/BPI-ROOT"
 	#
@@ -61,13 +61,19 @@ R="${SD}/BPI-ROOT"
 	#
 	## create files for bpi-tools & bpi-migrate
 	#
-	(cd $B ; tar czvf $SD/BPI-BOOT-${board}-${service}.tgz .)
+	#(cd $B ; tar czvf $SD/BPI-BOOT-${board}-${service}.tgz .)
 	(cd $R ; tar czvf $SD/${kernel}-net.tgz lib/modules/${kernel}/kernel/net)
 	(cd $R ; mv lib/modules/${kernel}/kernel/net $R/net)
 	(cd $R ; tar czvf $SD/${kernel}.tgz lib/modules)
 	(cd $R ; mv $R/net lib/modules/${kernel}/kernel/net)
 	(cd $R ; tar czvf $SD/BOOTLOADER-${board}-${service}.tgz usr/lib/u-boot/bananapi)
-
+    rm $SD/5.15.77-net.tgz
+	rm $SD/5.15.77.tgz
+	rm $SD/BOOTLOADER-bpi-r3-linux-5.15.tgz
+	rm -rf $SD/BPI-ROOT/usr
+	rm -rf $SD/BOOTLOADER-bpi-r3-linux-5.15
+	gunzip $SD/BPI-R3-console-linux-5.15-boot.img.gz
+	cp bpi-copy SD/
 	return #SKIP
 }
 
